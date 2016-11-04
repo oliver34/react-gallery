@@ -1,6 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function (global){
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -10,46 +9,62 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var React = (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null);
-var ReactDOM = (typeof window !== "undefined" ? window['ReactDOM'] : typeof global !== "undefined" ? global['ReactDOM'] : null);
+function getImageData() {
+	var xhr = new XMLHttpRequest();
+	xhr.open("get", "../data/imagedata.json");
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			return xhr.responseText;
+			xhr = null;
+		}
+	};
+	xhr.send(null);
+}
 
-var LikeButton = function (_React$Component) {
-	_inherits(LikeButton, _React$Component);
+var Gallery = function (_React$Component) {
+	_inherits(Gallery, _React$Component);
 
-	function LikeButton(props) {
-		_classCallCheck(this, LikeButton);
+	function Gallery() {
+		_classCallCheck(this, Gallery);
 
-		var _this = _possibleConstructorReturn(this, (LikeButton.__proto__ || Object.getPrototypeOf(LikeButton)).call(this, props));
-
-		_this.handleClick = _this.handleClick.bind(_this);
-		_this.state = { liked: false };
-		return _this;
+		return _possibleConstructorReturn(this, (Gallery.__proto__ || Object.getPrototypeOf(Gallery)).apply(this, arguments));
 	}
 
-	_createClass(LikeButton, [{
-		key: 'handleClick',
-		value: function handleClick() {
-			this.setState({ liked: !this.state.liked });
-		}
-	}, {
-		key: 'render',
+	_createClass(Gallery, [{
+		key: "render",
 		value: function render() {
-			var text = this.state.liked ? "like" : "never liked";
 			return React.createElement(
-				'p',
-				{ onClick: this.handleClick },
-				'You ',
-				text,
-				' this. Click to toggle.'
+				"section",
+				{ className: "stage" },
+				React.createElement("section", { className: "img-sec" }),
+				React.createElement("nav", { className: "control-nav" })
 			);
 		}
 	}]);
 
-	return LikeButton;
+	return Gallery;
 }(React.Component);
+/*class LikeButton extends React.Component{
+	constructor(props){
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+		this.state = {liked :false};
+	}
+	handleClick(){
+		getImageData();
+		this.setState({liked : !this.state.liked});
+	}
+	render(){
+		var text = this.state.liked ? "like" : "never liked";
+		return (
+			<p onClick={this.handleClick}>
+				You {text} this. Click to toggle.
+			</p>
+		);
+	}
+};*/
 
-;
-ReactDOM.render(React.createElement(LikeButton, null), document.getElementById("example7"));
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+ReactDOM.render(React.createElement(Gallery, null), document.getElementById("content"));
+
 },{}]},{},[1]);

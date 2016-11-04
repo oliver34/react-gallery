@@ -1,7 +1,36 @@
-.test {
-  background-color: #4D9264;
-  border: 1px solid black;
+html,
+body {
+  background-color: #222;
+  width: 100%;
+  height: 100%;
 }
-h2 {
-  color: #5ea375;
+.content {
+  width: 100%;
+  height: 100%;
 }
+/* stage -- start */
+.stage {
+  position: relative;
+  width: 100%;
+  height: 680px;
+}
+/* stage -- height */
+/* image -- start */
+.img-sec {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #ddd;
+}
+/* image -- end */
+/* control -- start */
+.control-nav {
+  position: absolute;
+  left: 0;
+  bottom: 30px;
+  z-index: 101;
+  width: 100%;
+  text-align: center;
+}
+/* control -- end */

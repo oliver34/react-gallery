@@ -2,7 +2,6 @@ var gulp = require("gulp"),
 	less = require("gulp-less"),
 	browserify = require("browserify"),
 	browserSync = require("browser-sync").create(),
-	shim = require('browserify-shim'),
 	babelify = require("babelify"),
 	source = require("vinyl-source-stream");
 
@@ -20,7 +19,6 @@ gulp.task("jsx", function() {
 		.transform(babelify, {
 			presets: ['es2015', 'react']
 		})
-		.transform(shim)
 		.bundle()
 		.pipe(source('bundle.js'))
 		.pipe(gulp.dest('js'));
