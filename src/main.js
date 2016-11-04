@@ -80,8 +80,8 @@ class  Gallery extends React.Component{
 		//计算上侧区域图片排布位置的取值范围
 		constant.voPosRange.topY[0] = - imgHalfHei;
 		constant.voPosRange.topY[1] = stageHalfHei - imgHalfHei * 3;
-		constant.voPosRange.topY[0] = stageHalfWid - imgWidth;
-		constant.voPosRange.topY[1] = stageHalfWid;
+		constant.voPosRange.x[0] = stageHalfWid - imgWidth;
+		constant.voPosRange.x[1] = stageHalfWid;
 		this.reArrange(0);
 	}
 	/*
