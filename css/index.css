@@ -1,6 +1,7 @@
 html,
 body {
   background-color: #222;
+  overflow: hidden;
   width: 100%;
   height: 100%;
 }
@@ -23,6 +24,23 @@ body {
   overflow: hidden;
   background-color: #ddd;
 }
+.img-sec .img-figure {
+  position: absolute;
+  width: 300px;
+  height: 430px;
+  margin: 0;
+  padding: 40px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+.img-sec figcaption {
+  text-align: center;
+}
+.img-sec figcaption .img-title {
+  margin: 20px 0 0 0;
+  color: #a7a0a2;
+  font-size: 16px;
+}
 /* image -- end */
 /* control -- start */
 .control-nav {
@@ -34,3 +52,6 @@ body {
   text-align: center;
 }
 /* control -- end */
+.img {
+  height: 320px;
+}

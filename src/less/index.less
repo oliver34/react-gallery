@@ -5,6 +5,7 @@
 }
 html,body{
 	background-color: #222;
+	overflow: hidden;
 	.full-size;
 }
 .content{
@@ -23,6 +24,23 @@ html,body{
 	.full-size;
 	overflow: hidden;
 	background-color: #ddd;
+	.img-figure{
+		position: absolute;
+		width:300px;
+		height:430px;
+		margin:0;
+		padding: 40px;
+		background-color: #ffffff;
+		box-sizing: border-box;
+	}
+	figcaption{
+		text-align: center;
+		.img-title{
+			margin: 20px 0 0 0;
+			color: #a7a0a2;
+			font-size: 16px;
+		}
+	}
 }
 /* image -- end */
 /* control -- start */
@@ -35,3 +53,6 @@ html,body{
 	text-align: center;
 }
 /* control -- end */
+.img{
+	height:320px;
+}
