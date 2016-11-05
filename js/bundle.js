@@ -22,12 +22,12 @@ var imageData = void 0;
 })("../data/imagedata.json");
 
 //获取区间内的一个随机值
-function getRangeRandom(low, high) {
+var getRangeRandom = function getRangeRandom(low, high) {
 	return Math.random() * (high - low) + low;
 };
 
 //获取0-30区间的任意正负值
-function get30DegRandom() {
+var get30DegRandom = function get30DegRandom() {
 	return (Math.random() > 0.5 ? '' : '-') + Math.random() * 30;
 };
 
@@ -66,8 +66,8 @@ var ImageFigure = function (_React$Component) {
 
 			//添加图片旋转角度
 			if (this.props.arrange.rotate) {
-				["-moz-", "-ms-", "-webkit-", ""].forEach(function (value) {
-					styleObj[value + "transform"] = "rotate(" + this.props.arrange.rotate + "deg)";
+				["Moz", "ms", "Webkit", ""].forEach(function (value) {
+					styleObj[value + "Transform"] = "rotate(" + this.props.arrange.rotate + "deg)";
 				}.bind(this));
 			}
 
@@ -242,7 +242,7 @@ var Gallery = function (_React$Component3) {
 			    voPosRangeTopY = voPosRange.topY,
 			    voPosRangeX = voPosRange.x,
 			    imagesAranTopArr = [],
-			    topImgNum = Math.ceil(Math.random() * 2),
+			    topImgNum = Math.floor(Math.random() * 2),
 			    //取一个或者不取
 			topImgSpliceIdex = 0,
 			    imgsArranCenterArr = imagesAranArr.splice(centerIndex, 1);
@@ -346,10 +346,10 @@ var Gallery = function (_React$Component3) {
 						isCenter: false
 					};
 				}
-				imgFigures.push(React.createElement(ImageFigure, { data: value, ref: "imgFigure" + index,
+				imgFigures.push(React.createElement(ImageFigure, { key: index, data: value, ref: "imgFigure" + index,
 					arrange: this.state.imagesAranArr[index],
 					inverse: this.inverse(index), center: this.center(index) }));
-				controlBar.push(React.createElement(ControBar, { arrange: this.state.imagesAranArr[index],
+				controlBar.push(React.createElement(ControBar, { key: index, arrange: this.state.imagesAranArr[index],
 					inverse: this.inverse(index), center: this.center(index) }));
 			}.bind(this));
 			return React.createElement(

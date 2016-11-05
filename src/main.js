@@ -11,12 +11,10 @@ let imageData;
 })("../data/imagedata.json")
 
 //获取区间内的一个随机值
-function getRangeRandom(low,high){
-	return (Math.random()*(high-low)+low);
-};
+var getRangeRandom = (low,high) => {return (Math.random()*(high-low)+low)};
 
 //获取0-30区间的任意正负值
-function get30DegRandom(){
+var get30DegRandom = () =>{
 	return ((Math.random() > 0.5 ? '' : '-')+(Math.random()*30));
 };
 
@@ -46,8 +44,8 @@ class ImageFigure extends React.Component{
 
 		//添加图片旋转角度
 		if(this.props.arrange.rotate){
-			(["-moz-","-ms-","-webkit-",""]).forEach(function(value){
-				styleObj[value+"transform"] = "rotate("+this.props.arrange.rotate+"deg)";
+			(["Moz","ms","Webkit",""]).forEach(function(value){
+				styleObj[value+"Transform"] = "rotate("+this.props.arrange.rotate+"deg)";
 			}.bind(this));
 			
 		}
@@ -182,7 +180,7 @@ class  Gallery extends React.Component{
 			voPosRangeTopY = voPosRange.topY,
 			voPosRangeX = voPosRange.x,
 			imagesAranTopArr = [],
-			topImgNum = Math.ceil(Math.random() * 2),//取一个或者不取
+			topImgNum = Math.floor(Math.random() * 2),//取一个或者不取
 			topImgSpliceIdex = 0,
 			imgsArranCenterArr = imagesAranArr.splice(centerIndex,1);
 			
@@ -278,10 +276,10 @@ class  Gallery extends React.Component{
 					isCenter : false
 				}
 			}
-			imgFigures.push(<ImageFigure data={value} ref={"imgFigure"+index} 
+			imgFigures.push(<ImageFigure key = {index} data={value} ref={"imgFigure"+index} 
 				arrange = {this.state.imagesAranArr[index]} 
 				inverse = {this.inverse(index)} center = {this.center(index)}/>);
-			controlBar.push(<ControBar arrange = {this.state.imagesAranArr[index]} 
+			controlBar.push(<ControBar key = {index} arrange = {this.state.imagesAranArr[index]} 
 							inverse = {this.inverse(index)} center = {this.center(index)}/>);
 		}.bind(this))
 		return(
