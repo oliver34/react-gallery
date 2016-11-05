@@ -105,18 +105,69 @@ var ImageFigure = function (_React$Component) {
 	return ImageFigure;
 }(React.Component);
 
-var Gallery = function (_React$Component2) {
-	_inherits(Gallery, _React$Component2);
+//控制组件
+
+
+var ControBar = function (_React$Component2) {
+	_inherits(ControBar, _React$Component2);
+
+	function ControBar(props) {
+		_classCallCheck(this, ControBar);
+
+		var _this2 = _possibleConstructorReturn(this, (ControBar.__proto__ || Object.getPrototypeOf(ControBar)).call(this, props));
+
+		_this2.handleClick = _this2.handleClick.bind(_this2);
+		return _this2;
+	}
+
+	_createClass(ControBar, [{
+		key: "handleClick",
+		value: function handleClick(e) {
+			//如果点击选中状态的按钮，则翻转图片，否则居中对应图片
+			if (this.props.arrange.isCenter) {
+				this.props.inverse();
+			} else {
+				this.props.center();
+			}
+			e.stopPropagation();
+			e.preventDefault();
+		}
+	}, {
+		key: "render",
+		value: function render() {
+			var controBarClassName = "control-bar";
+			//如果对应是居中图片，显示控制按钮的居中状态
+			if (this.props.arrange.isCenter) {
+				controBarClassName += " is-center iconfont";
+				//如果图片翻转
+				if (this.props.arrange.isInverse) {
+					controBarClassName += " icon-arrow-left";
+				} else {
+					controBarClassName += " icon-arrow-right";
+				}
+			}
+
+			return React.createElement("span", { className: controBarClassName, onClick: this.handleClick });
+		}
+	}]);
+
+	return ControBar;
+}(React.Component);
+
+;
+
+var Gallery = function (_React$Component3) {
+	_inherits(Gallery, _React$Component3);
 
 	function Gallery(props) {
 		_classCallCheck(this, Gallery);
 
-		var _this2 = _possibleConstructorReturn(this, (Gallery.__proto__ || Object.getPrototypeOf(Gallery)).call(this, props));
+		var _this3 = _possibleConstructorReturn(this, (Gallery.__proto__ || Object.getPrototypeOf(Gallery)).call(this, props));
 
-		_this2.reArrange = _this2.reArrange.bind(_this2);
-		_this2.inverse = _this2.inverse.bind(_this2);
-		_this2.center = _this2.center.bind(_this2);
-		_this2.state = {
+		_this3.reArrange = _this3.reArrange.bind(_this3);
+		_this3.inverse = _this3.inverse.bind(_this3);
+		_this3.center = _this3.center.bind(_this3);
+		_this3.state = {
 			imagesAranArr: [{
 				pos: {
 					left: 0,
@@ -127,7 +178,7 @@ var Gallery = function (_React$Component2) {
 				isCenter: false
 			}]
 		};
-		return _this2;
+		return _this3;
 	}
 
 	/*组件加载后,为每张图片计算其位置的范围*/
@@ -281,7 +332,7 @@ var Gallery = function (_React$Component2) {
 	}, {
 		key: "render",
 		value: function render() {
-			var controller = [],
+			var controlBar = [],
 			    imgFigures = [];
 			imageData.forEach(function (value, index) {
 				if (!this.state.imagesAranArr[index]) {
@@ -298,6 +349,8 @@ var Gallery = function (_React$Component2) {
 				imgFigures.push(React.createElement(ImageFigure, { data: value, ref: "imgFigure" + index,
 					arrange: this.state.imagesAranArr[index],
 					inverse: this.inverse(index), center: this.center(index) }));
+				controlBar.push(React.createElement(ControBar, { arrange: this.state.imagesAranArr[index],
+					inverse: this.inverse(index), center: this.center(index) }));
 			}.bind(this));
 			return React.createElement(
 				"section",
@@ -307,7 +360,11 @@ var Gallery = function (_React$Component2) {
 					{ className: "img-sec" },
 					imgFigures
 				),
-				React.createElement("nav", { className: "control-nav" })
+				React.createElement(
+					"nav",
+					{ className: "control-nav" },
+					controlBar
+				)
 			);
 		}
 	}]);

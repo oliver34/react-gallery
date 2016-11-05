@@ -73,6 +73,42 @@ class ImageFigure extends React.Component{
 	}
 }
 
+//控制组件
+class ControBar extends React.Component{
+	constructor(props){
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+	}
+	handleClick(e){
+		//如果点击选中状态的按钮，则翻转图片，否则居中对应图片
+		if(this.props.arrange.isCenter){
+			this.props.inverse();
+		}else{
+			this.props.center();
+		}
+		e.stopPropagation();
+		e.preventDefault();
+	}
+	render(){
+		var controBarClassName = "control-bar";
+		//如果对应是居中图片，显示控制按钮的居中状态
+		if(this.props.arrange.isCenter){
+			controBarClassName += " is-center iconfont";
+			//如果图片翻转
+			if(this.props.arrange.isInverse){
+				controBarClassName += " icon-arrow-left";
+			}else{
+				controBarClassName += " icon-arrow-right";
+			}
+		}
+
+		return (
+			<span className = {controBarClassName} onClick = {this.handleClick}>
+			</span>
+		)
+	}
+};
+
 class  Gallery extends React.Component{
 	constructor(props){
 		super(props);
@@ -229,7 +265,7 @@ class  Gallery extends React.Component{
 	}
 
 	render(){
-		let controller = [],imgFigures = [];
+		let controlBar = [],imgFigures = [];
 		imageData.forEach(function(value,index){
 			if(!this.state.imagesAranArr[index]){
 				this.state.imagesAranArr[index] = {
@@ -245,6 +281,8 @@ class  Gallery extends React.Component{
 			imgFigures.push(<ImageFigure data={value} ref={"imgFigure"+index} 
 				arrange = {this.state.imagesAranArr[index]} 
 				inverse = {this.inverse(index)} center = {this.center(index)}/>);
+			controlBar.push(<ControBar arrange = {this.state.imagesAranArr[index]} 
+							inverse = {this.inverse(index)} center = {this.center(index)}/>);
 		}.bind(this))
 		return(
 			<section className="stage" ref="stage">
@@ -252,6 +290,7 @@ class  Gallery extends React.Component{
 					{imgFigures}
 				</section>
 				<nav className="control-nav">
+					{controlBar}
 				</nav>
 			</section>
 		)
